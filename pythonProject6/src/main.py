@@ -1,0 +1,15 @@
+from src.work import *
+
+data_csv = read_file()
+n = len(data_csv)
+print(f'n = {n}\n')
+max_x, min_x = min_max_x(data_csv)
+l, k = l_and_k(max_x, min_x, n)
+matrix, x_avg = matrix(min_x, max_x, n, l, data_csv)
+sigma = sigma(matrix)
+mo, m_e = moda_and_m_e(matrix, n)
+a_three = a_three(matrix, sigma)
+e_k = e_k(matrix, sigma)
+v = v(sigma, x_avg)
+gen_avg(x_avg, sigma, n)
+sigma_r_l(n, sigma)
