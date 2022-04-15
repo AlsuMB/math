@@ -69,7 +69,13 @@ def moda_and_m_e(matrix, n):
     mo = matrix[max_len][0][0] - (matrix[max_len][1] - matrix[max_len - 1][1]) / (
             (matrix[max_len][1] - matrix[max_len - 1][1]) + ((matrix[max_len][1] - matrix[max_len + 1][1])))
     print(f'\nM0 = {mo}\n')
-    m_e = matrix[max_len][0][0] + 0.5 * n
+    rignt_i = 0
+    for i in range(len(matrix)):
+        if matrix[i][6] > n / 2:
+            right_i = i
+            break
+
+    m_e = matrix[max_len][0][0] + (((0.5 * n - matrix[rignt_i - 1][6]) / matrix[right_i][1]) * (matrix[right_i][0][1] - matrix[right_i][0][0]))
     print(f"me = {m_e}\n")
     return mo, m_e
 
@@ -107,7 +113,7 @@ def gen_avg(x_avg, sigma, n, t=2.045):
     print(f'{x_minus} < x < {x_plus}\nС вероятостью 95 % наша генеральная средняя попадает в этот интервал')
 
 
-def sigma_r_l(n, sigma, x_2_lambda_1=49.7, x_2_lambda_2=16, m = 0.95):
+def sigma_r_l(n, sigma, x_2_lambda_1=49.7, x_2_lambda_2=16, m=0.95):
     k = n - 1
     lambda_one = (1 - m) / 2
     lambda_two = (1 + m) / 2
@@ -115,5 +121,3 @@ def sigma_r_l(n, sigma, x_2_lambda_1=49.7, x_2_lambda_2=16, m = 0.95):
     sigma_right = (k * (sigma ** 2)) / x_2_lambda_2
     print(f"{sigma_left} < sigma^2 < {sigma_right}")
     print(f"{math.sqrt(sigma_left)} < sigma < {math.sqrt(sigma_right)}")
-
-
